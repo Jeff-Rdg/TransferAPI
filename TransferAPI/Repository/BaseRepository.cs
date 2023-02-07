@@ -18,7 +18,7 @@ namespace TransferAPI.Repository
             _context.Set<T>().Add(entity);
             _context.SaveChanges();
         }
-
+        
         public IEnumerable<T> GetAll()
         {
             var entities = _context.Set<T>().ToList();
@@ -27,8 +27,7 @@ namespace TransferAPI.Repository
 
         public T GetById(int id)
         {
-            var entity = _context.Set<T>().Find(id);
-            return entity;
+            return _context.Set<T>().Find(id);
         }
 
         public void Update(T entity)
