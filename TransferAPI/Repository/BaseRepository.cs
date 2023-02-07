@@ -18,7 +18,8 @@ namespace TransferAPI.Repository
             _context.Set<T>().Add(entity);
             _context.SaveChanges();
         }
-        
+
+
         public IEnumerable<T> GetAll()
         {
             var entities = _context.Set<T>().ToList();
@@ -30,10 +31,16 @@ namespace TransferAPI.Repository
             return _context.Set<T>().Find(id);
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
+            return entity;
+
+        }
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
 
         }
     }

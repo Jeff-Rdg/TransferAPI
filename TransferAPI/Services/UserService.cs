@@ -16,7 +16,16 @@ namespace TransferAPI.Services
 
         public void CreateUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // obs: criar classe de validação de usuários
+                _userRepository.Create(user);
+            }
+            catch (Exception ex)
+            {
+
+                throw new TransferException("Houve um erro ao criar um novo usuário.", ex);
+            }
         }
 
         public IEnumerable<User> GetUsers()
@@ -47,11 +56,29 @@ namespace TransferAPI.Services
 
         public User UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userUpdated = _userRepository.Update(user);
+                return userUpdated;
+            }
+            catch (Exception ex)
+            {
+
+                throw new TransferException("Erro ao atualizar usuário.", ex);
+            }
         }
         public void DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = GetUser(id);
+                _userRepository.Delete(user);
+            }
+            catch (Exception ex)
+            {
+
+                throw new TransferException($"Erro ao deletar usuário com Id {id}.", ex);
+            }
         }
 
 
